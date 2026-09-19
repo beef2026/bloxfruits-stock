@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Blox Fruits Stock</title>
+<style>
+body{font-family:Arial,sans-serif;background:#101014;color:white;text-align:center;margin:0;padding:40px}
+h1{font-size:32px}
+#stock{white-space:pre-line;font-size:22px;margin-top:30px}
+</style>
+</head>
+<body>
+<h1>🍎 Blox Fruits Stock</h1>
+<div id="stock">Cargando stock...</div>
+<script>
+const API="AQUI_VA_LA_API";
+async function cargarStock(){
+try{
+const r=await fetch(API);
+if(!r.ok)throw new Error("HTTP "+r.status);
+const d=await r.json();
+document.getElementById("stock").textContent=(d.normal||[]).join("\n");
+}catch(e){
+document.getElementById("stock").textContent="Error: "+e.message;
+}
+}
+cargarStock();
+setInterval(cargarStock,60000);
+</script>
+</body>
+</html>
